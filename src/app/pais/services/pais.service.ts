@@ -9,6 +9,7 @@ import { Country } from '../interfaces/pais-interface';
 export class PaisService {
 
   private apiUrl: string = `https://restcountries.com/v3.1/name`;
+  private apiUrlCap: string = `https://restcountries.com/v3.1/capital`;
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +17,11 @@ export class PaisService {
     const url = `${this.apiUrl}/${termino}`;
     //mandamos de return un observable a por-pais.component.ts
     return this.http.get<Country[]>(url);
+  }
+
+  buscarCap(termino: string): Observable<Country[]>{
+    const urlCap = `${this.apiUrlCap}/${termino}`;
+    return this.http.get<Country[]>(urlCap);
   }
 
 }
