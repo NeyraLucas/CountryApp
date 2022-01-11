@@ -8,13 +8,13 @@ import { Country } from '../interfaces/pais-interface';
 })
 export class PaisService {
 
-  private apiUrl: string = `https://restcountries.com/v3.1/name`;
+  private apiUrl: string = `https://restcountries.com/v3.1`;
   private apiUrlCap: string = `https://restcountries.com/v3.1/capital`;
 
   constructor(private http: HttpClient) { }
 
   buscarPais(termino: string): Observable<Country[]>{ // [] para un arr
-    const url = `${this.apiUrl}/${termino}`;
+    const url = `${this.apiUrl}/name/${termino}`;
     //mandamos de return un observable a por-pais.component.ts
     return this.http.get<Country[]>(url);
   }
@@ -23,5 +23,12 @@ export class PaisService {
     const urlCap = `${this.apiUrlCap}/${termino}`;
     return this.http.get<Country[]>(urlCap);
   }
+
+  getPaisPorAlpha(id: string): Observable<Country[]>{
+    const urlCap = `${this.apiUrl}/alpha/${id}`;
+    return this.http.get<Country[]>(urlCap);
+  }
+
+  
 
 }
